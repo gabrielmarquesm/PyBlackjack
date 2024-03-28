@@ -2,14 +2,31 @@ from card import Card
 
 
 class Hand:
-    def __init__(self):
+    ACE_RANK_NAME = "ACE"
+
+    def __init__(self) -> None:
         self.cards: list[Card] = []
         self.points = 0
 
-    def add_card(self, card):
+    def add_card(self, card: Card) -> None:
+        if card.rank_name == Hand.ACE_RANK_NAME:
+            self.adjust_for_ace(card)
         self.cards.append(card)
         self.points += card.points
 
-    # if points + ace > 21 then ace = 1 else ace = 11.
-    def adjust_for_ace(self):
-        pass
+    def adjust_for_ace(self, card: Card) -> None:
+        if self.points + 11 > 21:
+            card.points = 1
+
+    def __str__(self) -> str:
+        output = ""
+        hidden_card_points = 0
+
+        for card in self.cards:
+            if card.hidden:
+                hidden_card_points = card.points
+            output += f"- {card}\n"
+
+        output += f"\nTotal Points: {self.points - hidden_card_points}"
+
+        return output

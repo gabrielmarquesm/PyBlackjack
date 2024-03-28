@@ -1,4 +1,3 @@
-from card import Card
 from deck import Deck
 from hand import Hand
 from player import Player
@@ -10,14 +9,18 @@ class Dealer:
         self.deck: Deck = deck
         self.hand: Hand = hand
 
-    def deal_initial_cards(self, player: Player):
+    def deal_initial_cards(self, player: Player) -> None:
         for _ in range(2):
-            card: Card = self.deck.deal()
-            player.hand.add_card(card)
+            player.hand.add_card(self.deck.deal())
 
         for _ in range(2):
-            card: Card = self.deck.deal()
-            self.hand.add_card(card)
+            self.hand.add_card(self.deck.deal())
 
-    def reveal_card(self):
-        pass
+        self.hand.cards[0].hide()
+
+    def reveal_card(self) -> None:
+        self.hand.cards[0].reveal()
+
+    def hit(self) -> None:
+        while self.hand.points < 17:
+            self.hand.add_card(self.deck.deal())

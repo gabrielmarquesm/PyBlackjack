@@ -1,11 +1,21 @@
 from enum import Enum
+from os import system, name
 
 
-class Suit(Enum):
+def clear_screen() -> None:
+    system("cls" if name == "nt" else "clear")
+
+
+class Suit(str, Enum):
     HEARTS = "Hearts"
     DIAMONDS = "Diamonds"
     SPADES = "Spades"
     CLUBS = "Clubs"
+
+
+class PlayerAction(str, Enum):
+    HIT = "1"
+    STAND = "2"
 
 
 RANK: dict[str, int] = {

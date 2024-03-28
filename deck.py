@@ -14,5 +14,7 @@ class Deck:
     def shuffle(self):
         shuffle(self.cards)
 
-    def deal(self):
+    def deal(self) -> Card:
+        if not self.cards:
+            raise IndexError("Deck is empty, no more cards to deal.")
         return self.cards.pop()
