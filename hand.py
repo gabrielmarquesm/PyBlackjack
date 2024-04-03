@@ -18,6 +18,10 @@ class Hand:
         if self.points + 11 > 21:
             card.points = 1
 
+    def clear(self):
+        self.cards = []
+        self.points = 0
+
     def __str__(self) -> str:
         output = ""
         hidden_card_points = 0

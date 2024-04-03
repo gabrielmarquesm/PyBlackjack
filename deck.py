@@ -6,7 +6,7 @@ from util import Suit, RANK
 class Deck:
 
     def __init__(self):
-        self.cards = []
+        self.cards: list[Card] = []
         for suit in Suit:
             for name in RANK:
                 self.cards.append(Card(suit, name))

@@ -24,3 +24,7 @@ class Dealer:
     def hit(self) -> None:
         while self.hand.points < 17:
             self.hand.add_card(self.deck.deal())
+
+    def clear_table(self, player: Player):
+        self.hand.clear()
+        player.hand.clear()
