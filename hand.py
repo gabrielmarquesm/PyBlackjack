@@ -31,6 +31,6 @@ class Hand:
                 hidden_card_points = card.points
             output += f"- {card}\n"
 
-        output += f"\nTotal Points: {self.points - hidden_card_points}"
+        output += f"Total Points: {self.points - hidden_card_points}\n"
 
         return output

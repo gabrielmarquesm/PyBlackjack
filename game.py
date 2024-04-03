@@ -65,6 +65,7 @@ class Game:
 
     def start(self) -> None:
         print(GameStatus.GAME_START)
+        input(GameStatus.WAITING_INPUT)
 
         while self.player.cash:
             self.round += 1
@@ -97,4 +98,4 @@ class Game:
 
         clear_screen()
         print(GameStatus.GAME_OVER)
-        print(f"Total rounds played: {self.round}")
+        print(f"Total rounds played: {self.round}.")
