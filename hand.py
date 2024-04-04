@@ -6,7 +6,7 @@ class Hand:
 
     def __init__(self) -> None:
         self.cards: list[Card] = []
-        self.points = 0
+        self.points: int = 0
 
     def add_card(self, card: Card) -> None:
         if card.rank_name == Hand.ACE_RANK_NAME:
@@ -18,13 +18,13 @@ class Hand:
         if self.points + 11 > 21:
             card.points = 1
 
-    def clear(self):
+    def clear(self) -> None:
         self.cards = []
         self.points = 0
 
     def __str__(self) -> str:
-        output = ""
-        hidden_card_points = 0
+        output: str = ""
+        hidden_card_points: int = 0
 
         for card in self.cards:
             if card.hidden:

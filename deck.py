@@ -7,14 +7,18 @@ class Deck:
 
     def __init__(self):
         self.cards: list[Card] = []
-        for suit in Suit:
-            for name in RANK:
-                self.cards.append(Card(suit, name))
+        self.build()
+        self.shuffle()
+
+    def build(self):
+        self.cards = [Card(suit, name) for suit in Suit for name in RANK]
 
     def shuffle(self):
         shuffle(self.cards)
 
     def deal(self) -> Card:
         if not self.cards:
-            raise IndexError("Deck is empty, no more cards to deal.")
+            self.build()
+            self.shuffle()
+
         return self.cards.pop()

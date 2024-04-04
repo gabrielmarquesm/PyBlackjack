@@ -11,10 +11,8 @@ class Dealer:
 
     def deal_initial_cards(self, player: Player) -> None:
         for _ in range(2):
-            player.hand.add_card(self.deck.deal())
-
-        for _ in range(2):
             self.hand.add_card(self.deck.deal())
+            player.hand.add_card(self.deck.deal())
 
         self.hand.cards[0].hide()
 

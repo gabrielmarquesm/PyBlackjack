@@ -1,33 +1,3 @@
-"""
-util.py - Utilities for Game Development
-
-This module provides utility functions, enums and constants
-commonly used in game development. It includes helper
-functions for various tasks such as input validation,
-screen clearing, and game logic,as well as enums representing
-common game elements like player actions and round statuses.
-
-Enums:
-    Suit: Represents the suits in a standard deck of playing cards.
-    PlayerAction: Represents player actions in a game.
-    RoundStatus: Represents the status of a round in a game.
-    GameStatus: Represents the overall status of a game.
-
-Functions:
-    clear_screen(): Clear the console screen.
-    get_valid_bet_amount(cash: int) -> int: Get a valid bet amount from the user.
-    get_player_action(game_info: str) -> PlayerAction: Get the player action (HIT or STAND).
-    
-Constants:
-    STARTING_MONEY: The amount of money a player starts with in the game.
-    MAX_HAND_POINTS: The maximum points a hand can have in the game.
-    RANK: Dictionary mapping card ranks to their respective values.
-
-
-Usage:
-    Import this module in your game script to access the provided utility functions and enums.
-"""
-
 from enum import Enum
 import os
 
@@ -97,7 +67,7 @@ def clear_screen() -> None:
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def get_valid_bet_amount(cash: int) -> int:
+def get_valid_bet(cash: int) -> int:
     """Get a valid bet amount from the user (Positive integer less than total cash)."""
     while True:
         try:
