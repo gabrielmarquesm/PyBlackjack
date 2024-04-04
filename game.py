@@ -16,16 +16,71 @@ from util import (
 
 class Game:
     def __init__(self) -> None:
-        self.round: int = 0
-        self.deck: Deck = Deck()
-        self.dealer: Dealer = Dealer(self.deck, Hand())
-        self.player: Player = Player(STARTING_MONEY, self.deck, Hand())
+        self.current_round: int
+        self.round_status: RoundStatus
+        self.deck: Deck
+        self.dealer: Dealer
+        self.player: Player
 
-    def generate_table_info(self) -> str:
-        return f"Dealer's Hand:\n{self.dealer.hand}\nYour Hand:\n{self.player.hand}"
+    def start(self) -> None:
+        while True:
+            self.current_round = 0
+            self.deck = Deck()
+            self.dealer = Dealer(self.deck, Hand())
+            self.player = Player(STARTING_MONEY, self.deck, Hand())
 
-    def generate_round_info(self, bet: int) -> str:
-        return f"Round {self.round} Starting!\nCash: ${self.player.cash}\nBet Amount: ${bet}"
+            print(GameStatus.START)
+            input(GameStatus.WAITING_INPUT)
+
+            while self.player.cash:
+                self.prepare_round()
+                clear_screen()
+                self.play_round()
+
+            clear_screen()
+
+            print(GameStatus.GAME_OVER)
+            print(f"Total rounds played: {self.current_round}.")
+
+            if not self.restart():
+                break
+
+            clear_screen()
+
+    def restart(self) -> None | bool:
+        while True:
+            answer: str = input(GameStatus.RESTART).strip().lower()
+            if answer == "y":
+                return True
+            if answer == "n":
+                return False
+
+            clear_screen()
+            print(GameStatus.INVALID_INPUT)
+
+    def prepare_round(self) -> None:
+        self.current_round += 1
+        self.round_status: RoundStatus = RoundStatus.IN_PROGRESS
+        self.dealer.clear_table(self.player)
+        self.dealer.deal_initial_cards(self.player)
+
+    def play_round(self) -> None:
+        bet: int = get_valid_bet(self.player.cash)
+        self.generate_round_info(bet)
+
+        if self.player.hand.points == MAX_HAND_POINTS:
+            self.round_status = RoundStatus.BLACKJACK
+
+        while self.round_status == RoundStatus.IN_PROGRESS:
+            clear_screen()
+            action: PlayerAction = get_player_action(self.generate_table_info())
+            self.round_status = self.handle_player_action(PlayerAction(action))
+
+        clear_screen()
+        self.player.update_cash(bet, self.round_status)
+
+        print(self.generate_round_result())
+        input(GameStatus.WAITING_INPUT)
 
     def handle_player_action(self, action: PlayerAction) -> RoundStatus:
         match action:
@@ -61,56 +116,11 @@ class Game:
                 else:
                     return RoundStatus.LOSE
 
-    def start(self) -> None:
-        print(GameStatus.GAME_START)
-        input(GameStatus.WAITING_INPUT)
+    def generate_table_info(self) -> str:
+        return f"Dealer's Hand:\n{self.dealer.hand}\nYour Hand:\n{self.player.hand}"
 
-        while self.player.cash:
-            self.start_round()
+    def generate_round_info(self, bet: int) -> str:
+        return f"Round {self.current_round} Starting!\nCash: ${self.player.cash}\nBet Amount: ${bet}"
 
-        clear_screen()
-        print(GameStatus.GAME_OVER)
-        print(f"Total rounds played: {self.round}.")
-        input(GameStatus.WAITING_INPUT)
-
-    def start_round(self):
-        self.round += 1
-        round_status: RoundStatus = RoundStatus.IN_PROGRESS
-
-        self.dealer.clear_table(self.player)
-        self.dealer.deal_initial_cards(self.player)
-
-        clear_screen()
-
-        bet: int = get_valid_bet(self.player.cash)
-
-        self.generate_round_info(bet)
-
-        if self.player.hand.points == MAX_HAND_POINTS:
-            round_status = RoundStatus.BLACKJACK
-
-        while round_status == RoundStatus.IN_PROGRESS:
-            clear_screen()
-            action: PlayerAction = get_player_action(self.generate_table_info())
-            round_status = self.handle_player_action(PlayerAction(action))
-
-        clear_screen()
-        self.player.update_cash(bet, round_status)
-        print(round_status)
-        print(self.generate_table_info())
-
-        input(GameStatus.WAITING_INPUT)
-
-    def prepare_round(self):
-        # self.round += 1
-        # round_status: RoundStatus = RoundStatus.IN_PROGRESS
-        # self.dealer.clear_table(self.player)
-        # self.dealer.deal_initial_cards(self.player)
-        pass
-
-    def end_round(self):
-        # clear_screen()
-        # self.player.update_cash(bet, round_status)
-        # print(round_status)
-        # print(self.generate_table_info())
-        pass
+    def generate_round_result(self) -> str:
+        return f"{self.round_status}\n{self.generate_table_info()}"

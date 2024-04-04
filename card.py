@@ -13,10 +13,10 @@ class Card:
         self.points: int = RANK[rank_name]
         self.hidden: bool = False
 
-    def hide(self):
+    def hide(self) -> None:
         self.hidden = True
 
-    def reveal(self):
+    def reveal(self) -> None:
         self.hidden = False
 
     def __str__(self) -> str:

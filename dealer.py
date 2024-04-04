@@ -16,13 +16,13 @@ class Dealer:
 
         self.hand.cards[0].hide()
 
-    def reveal_card(self) -> None:
-        self.hand.cards[0].reveal()
-
     def hit(self) -> None:
         while self.hand.points < 17:
             self.hand.add_card(self.deck.deal())
 
-    def clear_table(self, player: Player):
+    def reveal_card(self) -> None:
+        self.hand.cards[0].reveal()
+
+    def clear_table(self, player: Player) -> None:
         self.hand.clear()
         player.hand.clear()

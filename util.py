@@ -54,9 +54,11 @@ class RoundStatus(str, Enum):
 class GameStatus(str, Enum):
     """Overall status of a game."""
 
-    GAME_START = "Welcome to PyBlackjack!"
+    START = "Welcome to PyBlackjack!"
+    RESTART = "Do you want to restart the game? (y/n): "
     GAME_OVER = "Game over!"
     WAITING_INPUT = "Press any key to continue..."
+    INVALID_INPUT = "Invalid input. Please enter 'y' or 'n'."
 
     def __str__(self) -> str:
         return self.value
