@@ -1,4 +1,4 @@
-from util import Suit, RANK
+from .util import Suit, RANK
 
 
 class Card:

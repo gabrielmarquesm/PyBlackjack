@@ -1,6 +1,6 @@
 from random import shuffle
-from card import Card
-from util import Suit, RANK
+from .card import Card
+from .util import Suit, RANK
 
 
 class Deck:

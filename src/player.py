@@ -1,6 +1,6 @@
-from deck import Deck
-from hand import Hand
-from util import RoundStatus
+from .deck import Deck
+from .hand import Hand
+from .util import RoundStatus
 
 
 class Player:

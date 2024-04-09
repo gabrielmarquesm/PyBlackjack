@@ -1,8 +1,8 @@
-from dealer import Dealer
-from deck import Deck
-from hand import Hand
-from player import Player
-from util import (
+from .dealer import Dealer
+from .deck import Deck
+from .hand import Hand
+from .player import Player
+from .util import (
     STARTING_MONEY,
     MAX_HAND_POINTS,
     GameStatus,
