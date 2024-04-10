@@ -3,6 +3,7 @@ A simplified text-based Blackjack game implemented in Python. Play against an au
 
 ## How to Run
 
+### Building from source
 1. Clone this repository to your local machine.
 2. Make sure you have Python installed on your system.
 3. Navigate to the project directory in your terminal.
@@ -10,6 +11,14 @@ A simplified text-based Blackjack game implemented in Python. Play against an au
 
    ```bash
    python main.py
+   ```
+
+### Running with the executable
+1. Download the latest release on the repository (Linux only)
+2. Run the following command to start the game:
+
+   ```bash
+   \.PyBlackjack
    ```
 
 ## How to Play
