@@ -1,6 +1,3 @@
-# This workflow will install Python dependencies and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python application
 
 on:
@@ -44,4 +41,4 @@ jobs:
           python_ver: '3.10'
           spec: 'main.py'
           upload_exe_with_name: 'PyBlackjack'
-          options: --onefile, --name 'PyBlackjack', --windowed,
+          options: '--onefile --name "PyBlackjack" --windowed'
