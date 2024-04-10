@@ -31,14 +31,3 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-
-  pyinstaller-build:
-    runs-on: [windows-latest, ubuntu-latest]
-    steps:
-      - name: Create Executable
-        uses: sayyid5416/pyinstaller@v1
-        with:
-          python_ver: '3.10'
-          spec: 'main.py'
-          upload_exe_with_name: 'PyBlackjack'
-          options: '--onefile --name "PyBlackjack" --windowed'
