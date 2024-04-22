@@ -1,5 +1,5 @@
-from .util import MAX_HAND_POINTS
 from .card import Card
+from .util import MAX_HAND_POINTS
 
 
 class Hand:

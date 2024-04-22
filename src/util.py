@@ -1,6 +1,5 @@
-from enum import Enum
 import os
-
+from enum import Enum
 
 STARTING_MONEY: int = 1000
 MAX_HAND_POINTS: int = 21
