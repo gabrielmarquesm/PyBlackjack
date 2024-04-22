@@ -1,10 +1,28 @@
 import os
 from enum import Enum
+from typing import TypedDict
 
 STARTING_MONEY: int = 1000
 MAX_HAND_POINTS: int = 21
 
-RANK: dict[str, int] = {
+
+class RankDict(TypedDict):
+    TWO: int
+    THREE: int
+    FOUR: int
+    FIVE: int
+    SIX: int
+    SEVEN: int
+    EIGHT: int
+    NINE: int
+    TEN: int
+    JACK: int
+    QUEEN: int
+    KING: int
+    ACE: int
+
+
+RANK: RankDict = {
     "TWO": 2,
     "THREE": 3,
     "FOUR": 4,

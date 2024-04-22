@@ -1,5 +1,5 @@
 from .card import Card
-from .util import MAX_HAND_POINTS
+from .util import MAX_HAND_POINTS, RANK
 
 
 class Hand:
@@ -9,13 +9,13 @@ class Hand:
         self.points: int = 0
 
     def add_card(self, card: Card) -> None:
-        if card.points == 11:
+        if card.points == RANK["ACE"]:
             self.adjust_for_ace(card)
         self.cards.append(card)
         self.points += card.points
 
     def adjust_for_ace(self, card: Card) -> None:
-        if self.points + 11 > MAX_HAND_POINTS:
+        if self.points + RANK["ACE"] > MAX_HAND_POINTS:
             card.points = 1
 
     def clear(self) -> None:
